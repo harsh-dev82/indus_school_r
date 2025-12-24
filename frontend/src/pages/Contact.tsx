@@ -1,83 +1,65 @@
-import { useState } from "react";
-import api from "../services/api";
+import banner from "../assets/contact-banner.jpg";
 
-const Contact = () => {
-  const [sent, setSent] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const formData = new FormData(e.currentTarget);
-
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      message: formData.get("message"),
-    };
-
-    try {
-      await api.post("contact/", data);
-      setSent(true);
-      e.currentTarget.reset();
-    } catch (error) {
-      alert("Failed to send message. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+export default function Contact() {
   return (
-    <div className="contact-page">
-      <h1>Contact Us</h1>
-      <p>We would love to hear from you.</p>
+    <div className="pt-24">
 
-      {sent && (
-        <div className="success-message">
-          ✅ Message sent successfully!  
-          We will get back to you soon.
-        </div>
-      )}
-
-      <div className="contact-container">
-        <div className="contact-info">
-          <h2>School Address</h2>
-          <p>Indus School</p>
-          <p>Sector 45, Chandigarh, India</p>
-          <p>Phone: +91 98765 43210</p>
-          <p>Email: info@indusschool.com</p>
-        </div>
-
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <h2>Send Message</h2>
-
-          <input name="name" type="text" placeholder="Your Name" required />
-          <input name="email" type="email" placeholder="Your Email" required />
-          <input name="phone" type="tel" placeholder="Your Phone" />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows={4}
-            required
-          />
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
+      {/* Banner */}
+      <div className="h-[55vh] w-full">
+        <img src={banner} className="w-full h-full object-cover" />
       </div>
 
-      <div className="map">
-        <iframe
-          title="Indus School Location"
-          src="https://www.google.com/maps?q=Chandigarh%20India&output=embed"
-          loading="lazy"
-        ></iframe>
+      <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8 px-6 py-16">
+
+        {/* Left Menu */}
+        <div className="bg-gray-100 rounded-lg p-4 space-y-3">
+          <div className="bg-white shadow px-4 py-3 rounded text-blue-700 font-semibold">
+            Contact Us
+          </div>
+          <div className="px-4 py-3 text-gray-700 hover:bg-white rounded cursor-pointer">
+            Location Map
+          </div>
+        </div>
+
+        {/* Contact Info */}
+        <div className="md:col-span-3 bg-white rounded-xl shadow p-8 space-y-8">
+
+          <h2 className="text-3xl font-bold text-blue-700">Contact Us</h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+
+            {/* Main Campus */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Postal Address</h3>
+              <p>
+                <b>Indus Public School</b><br/>
+                Delhi Road, Rohtak - 124001<br/>
+                Haryana (India)
+              </p>
+
+              <p><b>Phone:</b><br/>+91-99929-00573<br/>+91-99929-00574</p>
+
+              <p><b>Email:</b><br/>info@induspublicschool.com</p>
+            </div>
+
+            {/* Nursery Wing */}
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg">Postal Address</h3>
+              <p>
+                <b>Indus Public School (Nursery Wing)</b><br/>
+                96-A, Sindhu Bhawan, Subhash Nagar,<br/>
+                Rohtak - 124001
+              </p>
+
+              <p><b>Phone:</b><br/>9992900573, 9992900574</p>
+
+              <p><b>Website:</b><br/>www.induspublicschool.com</p>
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </div>
   );
-};
-
-export default Contact;
+}
