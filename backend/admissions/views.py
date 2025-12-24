@@ -4,6 +4,7 @@ from rest_framework import status
 from django.core.mail import send_mail
 from django.conf import settings
 import logging
+import threading
 
 from .models import AdmissionEnquiry
 from .serializers import AdmissionEnquirySerializer
@@ -12,10 +13,6 @@ logger = logging.getLogger(__name__)
 
 
 class AdmissionEnquiryAPIView(CreateAPIView):
-    """
-    Public API
-    POST /api/admissions-enquiry/
-    """
     queryset = AdmissionEnquiry.objects.all()
     serializer_class = AdmissionEnquirySerializer
 
@@ -35,16 +32,20 @@ class AdmissionEnquiryAPIView(CreateAPIView):
             f"Message: {enquiry.message}"
         )
 
-        try:
-            send_mail(
-                subject=subject,
-                message=message,
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.DEFAULT_FROM_EMAIL],
-                fail_silently=False,   # <-- IMPORTANT
-            )
-        except Exception as e:
-            logger.error(f"Email sending failed: {e}")
+        # 🔐 Send email safely in background
+        def send_email_safe():
+            try:
+                send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                    fail_silently=True,   # <-- never crash
+                )
+            except Exception as e:
+                logger.error(f"Email sending failed: {e}")
+
+        threading.Thread(target=send_email_safe).start()
 
         return Response(
             {
