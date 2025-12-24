@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { Link } from "react-router-dom";
 
 interface Notice {
   id: number;
@@ -51,38 +52,28 @@ const Notices: React.FC = () => {
       ) : (
         <div className="space-y-6">
           {notices.map((n) => (
-            <div
+            <Link
               key={n.id}
-              className="border border-gray-200 rounded-xl p-6 bg-white shadow-md hover:shadow-lg transition"
+              to={`/notices/${n.id}`}
+              className="flex items-center gap-5 bg-white shadow rounded-lg p-4 hover:shadow-xl transition"
             >
-              <h2 className="text-xl font-semibold text-gray-800">
-                {n.title}
-              </h2>
-
-              {n.description && (
-                <p className="text-gray-600 mt-2">
-                  {n.description}
-                </p>
+              {n.file && (
+                <img
+                  src={n.file}
+                  alt={n.title}
+                  className="w-24 h-24 object-cover rounded-md"
+                />
               )}
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 gap-3">
-                <span className="text-sm text-gray-400">
-                  Published on{" "}
+              <div>
+                <h2 className="text-xl font-semibold text-gray-800">
+                  {n.title}
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
                   {new Date(n.created_at).toLocaleDateString()}
-                </span>
-
-                {n.file && (
-                  <a
-                    href={n.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-sm font-medium text-blue-700 hover:underline"
-                  >
-                    📄 Download Notice
-                  </a>
-                )}
+                </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

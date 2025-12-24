@@ -4,20 +4,17 @@ import api from "../services/api";
 interface Notice {
   id: number;
   title: string;
-  description: string;
   created_at: string;
 }
 
 const NoticesAdmin = () => {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const fetchNotices = () => {
-    api.get("notices/").then((res) => {
-      setNotices(res.data);
-    });
+  const fetchNotices = async () => {
+    const res = await api.get("notices/");
+    setNotices(res.data);
   };
 
   useEffect(() => {
@@ -27,21 +24,16 @@ const NoticesAdmin = () => {
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description) {
-      return alert("Title and description are required");
+    if (!title.trim()) {
+      return alert("Title is required");
     }
 
     try {
       setLoading(true);
-      await api.post("admin/notices/create/", {
-        title,
-        description,
-      });
+      await api.post("notices/", { title });
       setTitle("");
-      setDescription("");
       fetchNotices();
-      alert("Notice created successfully");
-    } catch {
+    } catch (err) {
       alert("Failed to create notice");
     } finally {
       setLoading(false);
@@ -50,22 +42,18 @@ const NoticesAdmin = () => {
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this notice?")) return;
-    await api.delete(`admin/notices/delete/${id}/`);
+
+    await api.delete(`notices/${id}/`);
     fetchNotices();
   };
 
   return (
     <div className="space-y-10">
-      {/* Page Title */}
-      <h1 className="text-2xl font-bold text-gray-800">
-        Notice Management
-      </h1>
+      <h1 className="text-2xl font-bold text-gray-800">Notice Management</h1>
 
-      {/* Create Notice Card */}
-      <div className="bg-white rounded shadow p-6">
-        <h2 className="text-lg font-semibold mb-4">
-          Create New Notice
-        </h2>
+      {/* Create Notice */}
+      <div className="bg-white rounded-xl shadow p-6 max-w-xl">
+        <h2 className="text-lg font-semibold mb-4">Create New Notice</h2>
 
         <form onSubmit={handleCreate} className="space-y-4">
           <input
@@ -73,14 +61,7 @@ const NoticesAdmin = () => {
             placeholder="Notice title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="border p-2 w-full rounded"
-          />
-
-          <textarea
-            placeholder="Notice description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="border p-2 w-full h-32 rounded"
+            className="border p-3 w-full rounded"
           />
 
           <button
@@ -93,32 +74,23 @@ const NoticesAdmin = () => {
         </form>
       </div>
 
-      {/* Notice List */}
-      <div>
-        <h2 className="text-lg font-semibold mb-4">
-          Published Notices
-        </h2>
+      {/* Notices List */}
+      <div className="max-w-3xl">
+        <h2 className="text-lg font-semibold mb-4">Published Notices</h2>
 
         {notices.length === 0 ? (
-          <p className="text-gray-500">
-            No notices found.
-          </p>
+          <p className="text-gray-500">No notices found.</p>
         ) : (
           <div className="space-y-4">
             {notices.map((notice) => (
               <div
                 key={notice.id}
-                className="bg-white rounded shadow p-4 flex justify-between items-start"
+                className="bg-white rounded-xl shadow p-4 flex justify-between items-center"
               >
-                <div className="space-y-1">
+                <div>
                   <h3 className="font-semibold text-gray-800">
                     {notice.title}
                   </h3>
-
-                  <p className="text-sm text-gray-600">
-                    {notice.description}
-                  </p>
-
                   <p className="text-xs text-gray-400">
                     {new Date(notice.created_at).toLocaleDateString()}
                   </p>

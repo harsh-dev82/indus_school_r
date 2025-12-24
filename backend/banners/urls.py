@@ -3,5 +3,5 @@ from .views import BannerListAPIView
 
 # banners/urls.py
 urlpatterns = [
-    path("banners/", BannerListAPIView.as_view()),
+    path("", BannerListAPIView.as_view()),
 ]

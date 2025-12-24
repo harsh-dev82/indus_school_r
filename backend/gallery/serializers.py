@@ -1,8 +1,16 @@
 from rest_framework import serializers
-from .models import GalleryImage
+from .models import Gallery, GalleryImage
+
 
 class GalleryImageSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
     class Meta:
         model = GalleryImage
-        fields = "__all__"
+        fields = ['id', 'image', 'created_at']
+
+
+class GallerySerializer(serializers.ModelSerializer):
+    images = GalleryImageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Gallery
+        fields = ['id', 'title', 'images']

@@ -5,6 +5,8 @@ import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./admin/AdminLayout";
 import ProtectedRoute from "./admin/ProtectedRoute";
 import ScrollToTop from "./components/ScrollToTop";
+import GalleryDetail from "./pages/GalleryDetail";
+import NoticeDetail from "./pages/NoticeDetail";
 
 /* ================= PUBLIC PAGES ================= */
 const Home = lazy(() => import("./pages/Home"));
@@ -55,8 +57,10 @@ function App() {
             <Route path="/admissions" element={<Admissions />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/:id" element={<GalleryDetail />} />
             <Route path="/principal" element={<Principal />} />
             <Route path="/notices" element={<Notices />} />
+            <Route path="/notices/:id" element={<NoticeDetail />} />
           </Route>
 
           {/* ================= ADMIN AUTH ================= */}

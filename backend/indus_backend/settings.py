@@ -141,16 +141,25 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # EMAIL CONFIG (TESTING)
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-EMAIL_HOST_USER = "admin@indusschool.com"
-EMAIL_HOST_PASSWORD = "Admin@258"
-
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "indus.school.test@gmail.com"
+EMAIL_HOST_PASSWORD = "auidebcnmbukyfdg"
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }

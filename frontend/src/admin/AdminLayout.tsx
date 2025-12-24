@@ -3,52 +3,25 @@ import { NavLink, Outlet } from "react-router-dom";
 const AdminLayout = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
+      
       {/* Sidebar */}
-      <aside className="w-64 bg-blue-900 text-white">
-        <div className="p-6 text-xl font-bold border-b border-blue-700">
-          Indus Admin
-        </div>
+      <aside className="w-64 bg-blue-900 text-white p-6">
+        <h2 className="text-2xl font-bold mb-10">Indus Admin</h2>
 
-        <nav className="p-4 space-y-2">
-          <NavLink
-            to="/admin/dashboard"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded ${
-                isActive ? "bg-blue-700" : "hover:bg-blue-800"
-              }`
-            }
-          >
-            Dashboard
-          </NavLink>
-
-          <NavLink
-            to="/admin/gallery"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded ${
-                isActive ? "bg-blue-700" : "hover:bg-blue-800"
-              }`
-            }
-          >
-            Gallery
-          </NavLink>
-
-          <NavLink
-            to="/admin/notices"
-            className={({ isActive }) =>
-              `block px-4 py-2 rounded ${
-                isActive ? "bg-blue-700" : "hover:bg-blue-800"
-              }`
-            }
-          >
-            Notices
-          </NavLink>
+        <nav className="space-y-4">
+          <NavLink to="/admin/dashboard">Dashboard</NavLink>
+          <NavLink to="/admin/banners">Banners</NavLink>
+          <NavLink to="/admin/notices">Notices</NavLink>
+          <NavLink to="/admin/gallery">Gallery</NavLink>
+          <NavLink to="/admin/enquiries">Enquiries</NavLink>
         </nav>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 p-6">
+      {/* Content */}
+      <main className="flex-1 p-8">
         <Outlet />
       </main>
+
     </div>
   );
 };

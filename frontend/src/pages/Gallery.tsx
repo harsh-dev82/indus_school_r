@@ -1,77 +1,78 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import { Link } from "react-router-dom";
+import banner from "../assets/gallery-banner.jpg"
 
 interface GalleryImage {
   id: number;
-  title: string;
   image: string;
 }
 
-const Gallery: React.FC = () => {
+const Gallery = () => {
   const [images, setImages] = useState<GalleryImage[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    api
-      .get<GalleryImage[]>("gallery/")
-      .then((res) => setImages(res.data))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
+    api.get("gallery/")
+      .then((res) => {
+        setImages(res.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError("Failed to load gallery. Please try again later.");
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
-    return (
-      <div className="pt-24 text-center text-lg text-gray-500">
-        Loading gallery...
-      </div>
-    );
+    return <p className="text-center mt-20">Loading gallery...</p>;
   }
 
   if (error) {
-    return (
-      <div className="pt-24 text-center text-red-600">
-        Failed to load gallery. Please try again later.
-      </div>
-    );
+    return <p className="text-center text-red-600 mt-20">{error}</p>;
+  }
+
+  if (images.length === 0) {
+    return <p className="text-center mt-20 text-gray-500">No images uploaded yet.</p>;
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-10 pt-24">
-      <h1 className="text-4xl font-bold text-blue-700 mb-10 text-center">
-        School Gallery
-      </h1>
-
-      {images.length === 0 ? (
-        <p className="text-center text-gray-500">
-          No images uploaded yet.
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {images.map((img) => (
-            <div
-              key={img.id}
-              className="group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition"
-            >
+    <div  style={{ marginTop: "5rem" }}>
+      <div className="relative h-[70vh] w-full">
+        <img
+          src={banner}
+          className="w-full h-full object-cover"
+          alt="Gallery Banner"
+        />
+      </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6"  style={{ marginTop: "4rem" }}>
+      {images.map((img: any) => (
+        <Link
+          key={img.id}
+          to={`/gallery/${img.id}`}
+          className="group border rounded-xl overflow-hidden shadow hover:shadow-xl transition"
+        >
+        <div className="relative h-64">
               <img
-                src={img.image}
-                alt={img.title || "Gallery Image"}
-                className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
+                src={img.images[0]?.image}
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
               />
-
-              {img.title && (
-                <div className="bg-white p-3 text-center">
-                  <p className="text-sm font-medium text-gray-700">
-                    {img.title}
-                  </p>
-                </div>
-              )}
+              <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition"></div>
             </div>
-          ))}
-        </div>
-      )}
+
+            <div className="p-6 text-center">
+              <h2 className="text-xl font-semibold text-gray-800">
+                {img.title}
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                {img.images.length} Photos
+              </p>
+            </div>
+        </Link>
+      ))}
+    </div>
     </div>
   );
 };
-
 export default Gallery;

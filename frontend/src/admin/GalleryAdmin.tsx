@@ -3,21 +3,18 @@ import api from "../services/api";
 
 interface GalleryImage {
   id: number;
-  title: string;
   image: string;
 }
 
 const GalleryAdmin = () => {
   const [images, setImages] = useState<GalleryImage[]>([]);
-  const [title, setTitle] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchImages = () => {
-    api.get("gallery/").then((res) => {
-      setImages(res.data);
-    });
+  const fetchImages = async () => {
+    const res = await api.get("gallery/");
+    setImages(res.data);
   };
 
   useEffect(() => {
@@ -29,19 +26,14 @@ const GalleryAdmin = () => {
     if (!file) return alert("Please select an image");
 
     const formData = new FormData();
-    formData.append("title", title);
     formData.append("image", file);
 
     try {
       setLoading(true);
-      await api.post("admin/gallery/upload/", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      setTitle("");
+      await api.post("gallery/upload/", formData);
       setFile(null);
       setPreview(null);
       fetchImages();
-      alert("Image uploaded successfully");
     } catch {
       alert("Upload failed");
     } finally {
@@ -51,41 +43,30 @@ const GalleryAdmin = () => {
 
   const handleDelete = async (id: number) => {
     if (!confirm("Delete this image?")) return;
-    await api.delete(`admin/gallery/delete/${id}/`);
+    await api.delete(`gallery/${id}/`);
     fetchImages();
   };
 
   return (
     <div className="space-y-10">
-      {/* Page Title */}
       <h1 className="text-2xl font-bold text-gray-800">
         Gallery Management
       </h1>
 
-      {/* Upload Card */}
-      <div className="bg-white p-6 rounded shadow">
+      {/* Upload Section */}
+      <div className="bg-white p-6 rounded-xl shadow max-w-lg">
         <h2 className="text-lg font-semibold mb-4">
           Upload New Image
         </h2>
 
         <form onSubmit={handleUpload} className="space-y-4">
           <input
-            type="text"
-            placeholder="Image title (optional)"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border p-2 w-full rounded"
-          />
-
-          <input
             type="file"
             accept="image/*"
             onChange={(e) => {
               const selected = e.target.files?.[0] || null;
               setFile(selected);
-              if (selected) {
-                setPreview(URL.createObjectURL(selected));
-              }
+              if (selected) setPreview(URL.createObjectURL(selected));
             }}
           />
 
@@ -119,16 +100,16 @@ const GalleryAdmin = () => {
             {images.map((img) => (
               <div
                 key={img.id}
-                className="bg-white rounded shadow overflow-hidden"
+                className="bg-white rounded-xl shadow overflow-hidden"
               >
                 <img
-                  src={`http://127.0.0.1:8000${img.image}`}
+                  src={img.image}
                   className="w-full h-48 object-cover"
                 />
 
                 <div className="p-3 flex justify-between items-center">
-                  <span className="text-sm text-gray-700">
-                    {img.title || "—"}
+                  <span className="text-sm text-gray-600">
+                    Image #{img.id}
                   </span>
 
                   <button
