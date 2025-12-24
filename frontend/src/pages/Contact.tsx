@@ -1,4 +1,4 @@
-import banner from "../assets/contact-banner.jpg";
+import banner from "../assets/contact.jpg";
 
 export default function Contact() {
   return (
