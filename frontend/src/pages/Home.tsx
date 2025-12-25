@@ -27,7 +27,7 @@ const quickLinks = [
   },
   {
   title: "Beyond Academics",
-  image: "../assets/beyond academics.jpg",
+  image: beyondImg,
   link: "/beyond-academics"
 },
 ];
