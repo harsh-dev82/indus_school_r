@@ -1,4 +1,9 @@
 import { motion } from "framer-motion";
+import classroomImg from "../assets/classroom-activities.jpg";
+import culturalImg from "../assets/cultural.jpg";
+import sportsImg from "../assets/sports-activities.jpg";
+import toursImg from "../assets/educational-tours.jpg";
+
 
 const activities = [
   {
