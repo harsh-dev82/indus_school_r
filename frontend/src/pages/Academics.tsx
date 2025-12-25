@@ -1,71 +1,85 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import bgImage from "../assets/gallery-banner.jpg";   // rename your building image to this
 
 const sections = [
-  { id: "academics", title: "Academics", content: "Indus Public School is affiliated to CBSE Board in New Delhi till class XII. However, Class I to VIII follow a holistic school-based curriculum which is innovative and globally accepted. This enhances and encourages wider areas of learning." },
-  { id: "curriculum", title: "Curriculum", content: "The school has a well-structured curriculum focusing on intellectual, emotional, social and physical development of students." },
-  { id: "calendar", title: "School Calendar", content: "The academic calendar outlines important school events, examinations and holidays throughout the year." },
-  { id: "methodologies", title: "Teaching Methodologies", content: "Our methodologies integrate experiential learning, digital classrooms, hands-on activities, and student-centered approaches for maximum engagement." },
+  {
+    title: "Academics",
+    text: "Indus Public School is affiliated to CBSE Board in New Delhi till class XII. However, Class I to VIII follow a holistic school based curriculum which is innovative and internationally accepted."
+  },
+  {
+    title: "Curriculum",
+    text: "The school has a well-structured curriculum focusing on intellectual, emotional, social and physical development of the students."
+  },
+  {
+    title: "School Calendar",
+    text: "The academic calendar outlines important school events, examinations and holidays throughout the year."
+  },
+  {
+    title: "Teaching Methodologies",
+    text: "Our teaching methodologies focus on interactive learning, critical thinking and student engagement through modern tools and practices."
+  },
+  {
+    title: "Teaching Staff",
+    text: "Highly qualified and experienced teachers dedicated to student success and personal development."
+  },
+  {
+    title: "Student Details",
+    text: "We ensure individual student progress, counseling and academic mentoring."
+  }
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0 },
-};
-
 export default function Academics() {
-  const [active, setActive] = useState("academics");
-
   return (
-    <div className="min-h-screen pt-24 bg-gradient-to-b from-blue-50 to-white">
+    <div className="relative min-h-screen pt-28">
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-[280px_1fr] gap-10 px-6">
+      {/* 🔷 Background Image + Blur Overlay */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${bgImage})` }}
+      />
+      <div className="absolute inset-0 bg-white/80 backdrop-blur-lg" />
+
+      {/* 🔷 Main Content */}
+      <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-10">
 
         {/* Sidebar */}
-        <motion.div 
-          className="sticky top-32 h-fit bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6"
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
+        <motion.div
+          className="bg-white/90 backdrop-blur rounded-2xl shadow-xl p-6 space-y-3"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
         >
-          {sections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => {
-                document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" });
-                setActive(s.id);
-              }}
-              className={`w-full text-left px-5 py-4 mb-3 rounded-xl transition-all font-medium ${
-                active === s.id
-                  ? "bg-blue-600 text-white shadow-md"
-                  : "bg-gray-100 hover:bg-blue-50"
-              }`}
+          {sections.map((s, i) => (
+            <a
+              key={i}
+              href={`#${s.title.replace(/\s/g, "")}`}
+              className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
             >
               {s.title}
-            </button>
+            </a>
           ))}
         </motion.div>
 
-        {/* Content */}
-        <div className="space-y-24">
+        {/* Content Area */}
+        <div className="md:col-span-3 space-y-16">
 
           {sections.map((s, i) => (
-            <motion.section
-              id={s.id}
-              key={s.id}
-              className="bg-white rounded-3xl shadow-xl p-10"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
+            <motion.div
+              key={i}
+              id={s.title.replace(/\s/g, "")}
+              className="bg-white/90 backdrop-blur rounded-3xl shadow-xl p-10"
+              initial={{ y: 40, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
             >
-              <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 mb-6">
+              <h2 className="text-3xl font-extrabold text-blue-700 mb-4">
                 {s.title}
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                {s.content}
+              <p className="text-gray-700 leading-relaxed text-lg">
+                {s.text}
               </p>
-            </motion.section>
+            </motion.div>
           ))}
 
         </div>
