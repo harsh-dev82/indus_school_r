@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import banner from "../assets/beyond academics.jpg.jpg";
 
 const sections = [
   {
