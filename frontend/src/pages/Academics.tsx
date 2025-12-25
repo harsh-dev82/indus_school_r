@@ -37,7 +37,7 @@ export default function Academics() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       />
-      <div className="absolute inset-0 bg-white/50 backdrop-blur-md" />
+      <div className="absolute inset-0 bg-white/20 backdrop-blur-md" />
 
       {/* 🔷 Main Content */}
       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-10">
