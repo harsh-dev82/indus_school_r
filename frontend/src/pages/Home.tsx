@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeBanner";
 
 const quickLinks = [
@@ -26,18 +27,31 @@ const quickLinks = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
+
 const Home = () => {
   return (
     <main className="pt-24 overflow-hidden">
+
       {/* ================= HERO ================= */}
-      <HomeBanner />
+      <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+        <HomeBanner />
+      </motion.div>
 
       {/* ================= INTRO ================= */}
       <section className="py-28 bg-gradient-to-b from-blue-50 via-white to-white">
-        <div className="container-section text-center">
+        <motion.div
+          className="container-section text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-            Welcome to{" "}
-            <span className="text-gradient">Indus Public School</span>
+            Welcome to <span className="text-gradient">Indus Public School</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -45,7 +59,13 @@ const Home = () => {
             values shape confident learners and responsible future leaders.
           </p>
 
-          <div className="mt-12 flex flex-col sm:flex-row justify-center gap-5">
+          <motion.div
+            className="mt-12 flex flex-col sm:flex-row justify-center gap-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             <NavLink to="/admissions" className="btn-primary">
               Apply for Admission
             </NavLink>
@@ -53,16 +73,20 @@ const Home = () => {
             <NavLink to="/about" className="btn-outline">
               Learn More
             </NavLink>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* ================= WHY CHOOSE US ================= */}
       <section className="py-24 bg-white">
-        <div className="container-section">
-          <h2 className="section-title">
-            Why Choose Indus Public School?
-          </h2>
+        <motion.div
+          className="container-section"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeUp}
+          viewport={{ once: true }}
+        >
+          <h2 className="section-title">Why Choose Indus Public School?</h2>
 
           <p className="text-gray-600 text-center max-w-2xl mx-auto mb-16">
             We provide a nurturing environment that balances academics,
@@ -84,22 +108,31 @@ const Home = () => {
                 desc: "Equal emphasis on academics, sports, cultural activities, and discipline.",
               },
             ].map((item, i) => (
-              <div key={i} className="card text-center">
+              <motion.div
+                key={i}
+                className="card text-center"
+                variants={fadeUp}
+                transition={{ delay: i * 0.2 }}
+              >
                 <h3 className="text-xl font-semibold text-blue-700 mb-4">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ================= ADMISSION CTA ================= */}
       <section className="py-28 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
-        <div className="container-section text-center">
+        <motion.div
+          className="container-section text-center"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
             Admissions Open for 2025–26
           </h2>
@@ -109,23 +142,34 @@ const Home = () => {
             and a supportive learning environment.
           </p>
 
-          <NavLink
-            to="/admissions"
-            className="inline-block bg-white text-blue-700 px-12 py-4 rounded-full font-semibold shadow-md hover:scale-105 transition"
-          >
-            Enquire Now
-          </NavLink>
-        </div>
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <NavLink
+              to="/admissions"
+              className="inline-block bg-white text-blue-700 px-12 py-4 rounded-full font-semibold shadow-md transition"
+            >
+              Enquire Now
+            </NavLink>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* ================= QUICK LINKS ================= */}
       <section className="py-20 bg-gray-50">
-        <div className="container-section">
+        <motion.div
+          className="container-section"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeUp}
+          viewport={{ once: true }}
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {quickLinks.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group"
+                variants={fadeUp}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -6 }}
               >
                 <div className="overflow-hidden">
                   <img
@@ -145,11 +189,12 @@ const Home = () => {
                     {item.title}
                   </a>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
+
     </main>
   );
 };
