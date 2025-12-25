@@ -1,8 +1,18 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `relative px-1 py-2 text-sm transition-all duration-300
@@ -12,8 +22,17 @@ const Navbar: React.FC = () => {
      hover:after:w-full`;
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-md animate-fadeIn">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <motion.nav
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-xl shadow-xl py-3"
+          : "bg-white/90 backdrop-blur-md shadow-md py-4"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
 
         {/* LOGO */}
         <NavLink to="/" className="flex items-center gap-3">
@@ -58,7 +77,11 @@ const Navbar: React.FC = () => {
 
       {/* MOBILE MENU */}
       {open && (
-        <div className="md:hidden bg-white shadow-lg border-t animate-fadeIn">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden bg-white shadow-lg border-t"
+        >
           <div className="flex flex-col px-6 py-4 space-y-4">
             {[
               ["Home", "/"],
@@ -87,9 +110,9 @@ const Navbar: React.FC = () => {
               Admission Open
             </NavLink>
           </div>
-        </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 };
 
