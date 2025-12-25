@@ -9,7 +9,7 @@ export default function HomeBanner() {
   }, []);
 
   return (
-    <div className="pt-20">
+    <div>
       {banners.map(banner => (
         <div
           key={banner.id}

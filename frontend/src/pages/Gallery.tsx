@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
-import banner from "../assets/gallery-banner.jpg";
+import bgImage from "../assets/gallery-banner.jpg";
 import { motion } from "framer-motion";
 
 interface GalleryGroup {
@@ -33,69 +33,74 @@ const Gallery = () => {
     return <p className="text-center mt-20 text-gray-500">No images uploaded yet.</p>;
 
   return (
-    <div style={{ marginTop: "5rem" }}>
+    <section
+      className="min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: `linear-gradient(to bottom right, rgba(37,99,235,.7), rgba(17,24,39,.8)), url(${bgImage})`,
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-24">
 
-      {/* Banner Animation */}
-      <motion.div
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative h-[70vh] w-full"
-      >
-        <img src={banner} className="w-full h-full object-cover" />
-      </motion.div>
+        <motion.div
+          className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-10"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          <h1 className="text-4xl font-bold text-blue-700 mb-10 text-center">
+            School Gallery
+          </h1>
 
-      {/* Gallery Grid */}
-      <motion.div
-        className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6"
-        style={{ marginTop: "4rem" }}
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: {
-            transition: { staggerChildren: 0.12 }
-          }
-        }}
-      >
-        {images.map((img, index) => (
           <motion.div
-            key={img.id}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            initial="hidden"
+            animate="visible"
             variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 }
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.12 } }
             }}
-            transition={{ duration: 0.4, delay: index * 0.05 }}
           >
-            <Link
-              to={`/gallery/${img.id}`}
-              className="group border rounded-xl overflow-hidden shadow hover:shadow-xl transition block"
-            >
+            {images.map((img, index) => (
               <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                className="relative h-64"
+                key={img.id}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
               >
-                <img
-                  src={img.images[0]?.image}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition"></div>
-              </motion.div>
+                <Link
+                  to={`/gallery/${img.id}`}
+                  className="group border rounded-xl overflow-hidden shadow hover:shadow-xl transition block bg-white"
+                >
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative h-64"
+                  >
+                    <img
+                      src={img.images[0]?.image}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition"></div>
+                  </motion.div>
 
-              <div className="p-6 text-center">
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {img.title}
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">
-                  {img.images.length} Photos
-                </p>
-              </div>
-            </Link>
+                  <div className="p-6 text-center">
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      {img.title}
+                    </h2>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {img.images.length} Photos
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
-        ))}
-      </motion.div>
-    </div>
+        </motion.div>
+
+      </div>
+    </section>
   );
 };
 

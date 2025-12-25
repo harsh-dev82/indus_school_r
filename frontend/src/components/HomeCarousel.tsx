@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import "./HomeCarousel.css";
 
 const images = [
-  "/images/home1.jpg",
-  "/images/home2.jpg",
   "/images/home3.jpg",
+  "/images/home6.jpg",
+  "/images/home1.jpg",
   "/images/home4.jpg",
   "/images/home5.jpg",
-  "/images/home6.jpg"
+  "/images/home2.jpg"
 ];
 
 export default function HomeCarousel() {
@@ -29,11 +29,6 @@ export default function HomeCarousel() {
           style={{ backgroundImage: `url(${img})` }}
         />
       ))}
-
-      <div className="overlay">
-        <h1>Welcome to Indus School</h1>
-        <p>Where Learning Meets Excellence</p>
-      </div>
     </div>
   );
 }

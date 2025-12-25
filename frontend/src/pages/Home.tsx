@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
 import HomeCarousel from "../components/HomeCarousel";
+import FacilitiesCarousel from "../components/FacilitiesCarousel";
 import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeBanner";
 import beyondImg from "../assets/beyond academics.jpg";
 import activitiesImg from "../assets/activities.jpg";
+
+import facultyImg from "../assets/faculty.jpg";
+import infraImg from "../assets/infrastructure.jpeg";
+import holisticImg from "../assets/holistic.jpg";
 
 const quickLinks = [
   {
@@ -36,17 +41,34 @@ const fadeUp = {
 };
 
 const Home = () => {
+  const features = [
+    {
+      title: "Qualified Faculty",
+      desc: "Highly experienced and dedicated teachers focused on conceptual clarity and student growth.",
+      img: facultyImg,
+    },
+    {
+      title: "Modern Infrastructure",
+      desc: "Smart classrooms, well-equipped labs, library, and a secure campus environment.",
+      img: infraImg,
+    },
+    {
+      title: "Holistic Development",
+      desc: "Equal emphasis on academics, sports, cultural activities, and discipline.",
+      img: holisticImg,
+    },
+  ];
+
   return (
-    <main className="pt-24 overflow-hidden">
+    <main className="overflow-hidden" style={{ paddingTop: "4.6rem" }}>
 
       {/* ================= HERO ================= */}
       <motion.div initial="hidden" animate="visible" variants={fadeUp}>
         <HomeBanner />
       </motion.div>
-    <>
+
       <HomeCarousel />
-      {/* Other home sections */}
-    </>
+
       {/* ================= INTRO ================= */}
       <section className="py-28 bg-gradient-to-b from-blue-50 via-white to-white">
         <motion.div
@@ -100,35 +122,34 @@ const Home = () => {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              {
-                title: "Qualified Faculty",
-                desc: "Highly experienced and dedicated teachers focused on conceptual clarity and student growth.",
-              },
-              {
-                title: "Modern Infrastructure",
-                desc: "Smart classrooms, well-equipped labs, library, and a secure campus environment.",
-              },
-              {
-                title: "Holistic Development",
-                desc: "Equal emphasis on academics, sports, cultural activities, and discipline.",
-              },
-            ].map((item, i) => (
+            {features.map((item, i) => (
               <motion.div
                 key={i}
-                className="card text-center"
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition"
                 variants={fadeUp}
                 transition={{ delay: i * 0.2 }}
               >
-                <h3 className="text-xl font-semibold text-blue-700 mb-4">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                <div className="h-48 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-semibold text-blue-700 mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </section>
+
+      <FacilitiesCarousel />
 
       {/* ================= ADMISSION CTA ================= */}
       <section className="py-28 bg-gradient-to-r from-blue-700 to-blue-900 text-white relative overflow-hidden">

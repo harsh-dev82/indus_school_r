@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import { Link } from "react-router-dom";
+import bgImage from "../assets/gallery-banner.jpg";
 
 interface Notice {
   id: number;
@@ -40,44 +41,57 @@ const Notices: React.FC = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 pt-24">
-      <h1 className="text-4xl font-bold text-blue-700 mb-10 text-center">
-        Notices & Circulars
-      </h1>
+    <section
+      className="min-h-screen flex justify-center bg-cover bg-center relative"
+      style={{
+        backgroundImage: `linear-gradient(to bottom right, rgba(37,99,235,.7), rgba(17,24,39,.8)), url(${bgImage})`,
+      }}
+    >
+      <div className="w-full max-w-6xl mx-auto px-6 py-20">
 
-      {notices.length === 0 ? (
-        <p className="text-center text-gray-500">
-          No notices available at the moment.
-        </p>
-      ) : (
-        <div className="space-y-6">
-          {notices.map((n) => (
-            <Link
-              key={n.id}
-              to={`/notices/${n.id}`}
-              className="flex items-center gap-5 bg-white shadow rounded-lg p-4 hover:shadow-xl transition"
-            >
-              {n.file && (
-                <img
-                  src={n.file}
-                  alt={n.title}
-                  className="w-24 h-24 object-cover rounded-md"
-                />
-              )}
+        <div className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-10 animate-fadeUp">
 
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {n.title}
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">
-                  {new Date(n.created_at).toLocaleDateString()}
-                </p>
-              </div>
-            </Link>
-          ))}
+          <h1 className="text-4xl font-bold text-blue-700 mb-10 text-center">
+            Notices & Circulars
+          </h1>
+
+          {notices.length === 0 ? (
+            <p className="text-center text-gray-500">
+              No notices available at the moment.
+            </p>
+          ) : (
+            <div className="space-y-6">
+              {notices.map((n) => (
+                <Link
+                  key={n.id}
+                  to={`/notices/${n.id}`}
+                  className="flex items-center gap-5 bg-white shadow-lg rounded-xl p-5 hover:shadow-xl transition"
+                >
+                  {n.file && (
+                    <img
+                      src={n.file}
+                      alt={n.title}
+                      className="w-24 h-24 object-cover rounded-lg"
+                    />
+                  )}
+
+                  <div>
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      {n.title}
+                    </h2>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {new Date(n.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
         </div>
-      )}
-    </div>
+
+      </div>
+    </section>
   );
 };
 
