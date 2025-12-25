@@ -3,22 +3,22 @@ import { motion } from "framer-motion";
 const activities = [
   {
     title: "Classroom Activities",
-    image: "/activities/classroom.jpg",
+    image: "../assets/classroom-activities.jpg",
     desc: "Interactive classroom learning including group discussions, presentations and collaborative projects."
   },
   {
     title: "Cultural Activities",
-    image: "/activities/cultural.jpg",
+    image: "../assets/cultural.jpg",
     desc: "Dance, music, drama and cultural festivals nurturing creativity and confidence."
   },
   {
     title: "Sports Activities",
-    image: "/activities/sports.jpg",
+    image: "../assets/sports-activities.jpg",
     desc: "Indoor and outdoor sports promoting teamwork, discipline and physical fitness."
   },
   {
     title: "Educational Tours",
-    image: "/activities/tour.jpg",
+    image: "../assets/educational-tours.jpg",
     desc: "Learning beyond classrooms through excursions, trips and industrial visits."
   }
 ];
