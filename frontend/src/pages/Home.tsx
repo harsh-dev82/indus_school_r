@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import HomeCarousel from "../components/HomeCarousel";
 import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeBanner";
 import beyondImg from "../assets/beyond academics.jpg";
@@ -42,7 +43,10 @@ const Home = () => {
       <motion.div initial="hidden" animate="visible" variants={fadeUp}>
         <HomeBanner />
       </motion.div>
-
+    <>
+      <HomeCarousel />
+      {/* Other home sections */}
+    </>
       {/* ================= INTRO ================= */}
       <section className="py-28 bg-gradient-to-b from-blue-50 via-white to-white">
         <motion.div
