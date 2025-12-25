@@ -5,22 +5,22 @@ import beyondImg from "../assets/beyond academics.jpg.jpg";
 const sections = [
   {
     title: "Sports & Games",
-    image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/sports1.jpg",
+    image:  "/beyond/sports-games.jpg",
     desc: "Indus Public School encourages physical development through various indoor and outdoor games that build discipline, leadership and teamwork."
   },
   {
     title: "Music & Dance",
-    image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/cultural1.jpg",
+    image: "/beyond/music-dance.jpg",
     desc: "Students explore creative expression through music, dance and performing arts to develop confidence and personality."
   },
   {
     title: "Art & Craft",
-    image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/art1.jpg",
+    image: "/beyond/art-craft.jpg",
     desc: "Artistic skills are nurtured through painting, craft, sculpture and creative workshops."
   },
   {
     title: "Clubs & Activities",
-    image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/activity1.jpg",
+    image: "/beyond/cubs-activities.jpg",
     desc: "Various student clubs develop leadership, innovation and social responsibility."
   }
 ];
