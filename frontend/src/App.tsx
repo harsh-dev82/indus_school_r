@@ -7,6 +7,7 @@ import ProtectedRoute from "./admin/ProtectedRoute";
 import ScrollToTop from "./components/ScrollToTop";
 import GalleryDetail from "./pages/GalleryDetail";
 import NoticeDetail from "./pages/NoticeDetail";
+import BeyondAcademics from "./pages/BeyondAcademics";
 
 /* ================= PUBLIC PAGES ================= */
 const Home = lazy(() => import("./pages/Home"));
@@ -61,6 +62,7 @@ function App() {
             <Route path="/principal" element={<Principal />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="/notices/:id" element={<NoticeDetail />} />
+            <Route path="/beyond-academics" element={<BeyondAcademics />} />
           </Route>
 
           {/* ================= ADMIN AUTH ================= */}

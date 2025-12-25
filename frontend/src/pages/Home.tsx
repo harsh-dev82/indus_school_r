@@ -25,6 +25,11 @@ const quickLinks = [
     image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/more_img4.jpg",
     link: "/activities",
   },
+  {
+  title: "Beyond Academics",
+  image: "...",
+  link: "/beyond-academics"
+},
 ];
 
 const fadeUp = {
