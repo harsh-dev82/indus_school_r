@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeBanner";
 import beyondImg from "../assets/beyond academics.jpg";
-
+import activitiesImg from "../assets/activities.jpg"
 
 const quickLinks = [
   {
@@ -12,9 +12,9 @@ const quickLinks = [
     external: true,
   },
   {
-    title: "Beyond Academics",
-    image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/more_img2.jpg",
-    link: "/sports-and-games",
+  title: "Beyond Academics",
+  image: beyondImg,
+  link: "/beyond-academics"
   },
   {
     title: "Parents Login",
@@ -24,14 +24,9 @@ const quickLinks = [
   },
   {
     title: "Activities",
-    image: "https://ipsrohtak.edu.in/templates/indus-rtk/images/more_img4.jpg",
+    image: activitiesImg,
     link: "/activities",
   },
-  {
-  title: "Beyond Academics",
-  image: beyondImg,
-  link: "/beyond-academics"
-},
 ];
 
 const fadeUp = {

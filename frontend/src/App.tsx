@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import GalleryDetail from "./pages/GalleryDetail";
 import NoticeDetail from "./pages/NoticeDetail";
 import BeyondAcademics from "./pages/BeyondAcademics";
+import Activities from "./pages/Activities";
 
 /* ================= PUBLIC PAGES ================= */
 const Home = lazy(() => import("./pages/Home"));
@@ -63,6 +64,7 @@ function App() {
             <Route path="/notices" element={<Notices />} />
             <Route path="/notices/:id" element={<NoticeDetail />} />
             <Route path="/beyond-academics" element={<BeyondAcademics />} />
+            <Route path="/activities" element={<Activities />} />
           </Route>
 
           {/* ================= ADMIN AUTH ================= */}
