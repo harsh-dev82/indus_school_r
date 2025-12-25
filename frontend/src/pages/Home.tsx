@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeBanner";
+import beyondImg from "../assets/beyond academics.jpg";
+
 
 const quickLinks = [
   {
