@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeBanner";
 import beyondImg from "../assets/beyond academics.jpg";
-import activitiesImg from "../assets/activities.jpg"
+import activitiesImg from "../assets/activities.jpg";
 
 const quickLinks = [
   {
@@ -12,9 +12,9 @@ const quickLinks = [
     external: true,
   },
   {
-  title: "Beyond Academics",
-  image: beyondImg,
-  link: "/beyond-academics"
+    title: "Beyond Academics",
+    image: beyondImg,
+    link: "/beyond-academics",
   },
   {
     title: "Parents Login",
@@ -127,27 +127,33 @@ const Home = () => {
       </section>
 
       {/* ================= ADMISSION CTA ================= */}
-      <section className="py-28 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+      <section className="py-28 bg-gradient-to-r from-blue-700 to-blue-900 text-white relative overflow-hidden">
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-400/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 -right-20 w-72 h-72 bg-indigo-400/30 rounded-full blur-3xl"></div>
+
         <motion.div
-          className="container-section text-center"
-          variants={fadeUp}
+          className="container-section text-center relative z-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0, y: 60 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.9 } },
+          }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">
+          <motion.h2 className="text-4xl md:text-5xl font-extrabold mb-6">
             Admissions Open for 2025–26
-          </h2>
+          </motion.h2>
 
-          <p className="max-w-2xl mx-auto text-lg opacity-90 mb-10">
+          <motion.p className="max-w-2xl mx-auto text-lg opacity-90 mb-10">
             Secure your child’s future with quality education, strong values,
             and a supportive learning environment.
-          </p>
+          </motion.p>
 
-          <motion.div whileHover={{ scale: 1.05 }}>
+          <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }}>
             <NavLink
               to="/admissions"
-              className="inline-block bg-white text-blue-700 px-12 py-4 rounded-full font-semibold shadow-md transition"
+              className="inline-block bg-white text-blue-700 px-12 py-4 rounded-full font-semibold shadow-xl transition"
             >
               Enquire Now
             </NavLink>
