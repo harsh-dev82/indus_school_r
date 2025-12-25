@@ -1,29 +1,25 @@
 import { motion } from "framer-motion";
-import classroomImg from "../assets/classroom-activities.jpg";
-import culturalImg from "../assets/cultural.jpg";
-import sportsImg from "../assets/sports-activities.jpg";
-import toursImg from "../assets/educational-tours.jpg";
 
 
 const activities = [
   {
     title: "Classroom Activities",
-    image: "../assets/classroom-activities.jpg",
+    image: "/activities/classroom-activities.jpg",
     desc: "Interactive classroom learning including group discussions, presentations and collaborative projects."
   },
   {
     title: "Cultural Activities",
-    image: "../assets/cultural.jpg",
+    image: "/activities/cultural.jpg",
     desc: "Dance, music, drama and cultural festivals nurturing creativity and confidence."
   },
   {
     title: "Sports Activities",
-    image: "../assets/sports-activities.jpg",
+    image: "/activities/sports-activities.jpg",
     desc: "Indoor and outdoor sports promoting teamwork, discipline and physical fitness."
   },
   {
     title: "Educational Tours",
-    image: "../assets/educational-tours.jpg",
+    image: "/activities/educational-tours.jpg",
     desc: "Learning beyond classrooms through excursions, trips and industrial visits."
   }
 ];
