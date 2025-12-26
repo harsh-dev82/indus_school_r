@@ -44,7 +44,7 @@ const Admissions: React.FC = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-cover bg-center relative"
+    <section className="min-h-screen flex items-center justify-center bg-cover pt-20 mt-12 bg-center relative"
       style={{
         backgroundImage:
           "linear-gradient(to bottom right, rgba(37,99,235,.7), rgba(17,24,39,.8)), url('/images/home3.jpg')",

@@ -9,6 +9,13 @@ import GalleryDetail from "./pages/GalleryDetail";
 import NoticeDetail from "./pages/NoticeDetail";
 import BeyondAcademics from "./pages/BeyondAcademics";
 import Activities from "./pages/Activities";
+import AdminDashboard from "./admin/AdminDashboard";
+import AdminBanners from "./admin/AdminBanners";
+import AdminNotices from "./admin/AdminNotices";
+import AdminGallery from "./admin/AdminGallery";
+import AdminEnquiries from "./admin/AdminEnquiries";
+
+
 
 /* ================= PUBLIC PAGES ================= */
 const Home = lazy(() => import("./pages/Home"));
@@ -23,9 +30,9 @@ const Notices = lazy(() => import("./pages/Notices"));
 /* ================= ADMIN PAGES ================= */
 const Login = lazy(() => import("./admin/Login"));
 const ForgotPassword = lazy(() => import("./admin/ForgotPassword"));
-const Dashboard = lazy(() => import("./admin/Dashboard"));
-const GalleryAdmin = lazy(() => import("./admin/GalleryAdmin"));
-const NoticesAdmin = lazy(() => import("./admin/NoticesAdmin"));
+const Dashboard = lazy(() => import("./admin/AdminDashboard"));
+const GalleryAdmin = lazy(() => import("./admin/AdminGallery"));
+const NoticesAdmin = lazy(() => import("./admin/AdminNotices"));
 
 /* ================= FALLBACK ================= */
 const NotFound = () => (
@@ -65,6 +72,12 @@ function App() {
             <Route path="/notices/:id" element={<NoticeDetail />} />
             <Route path="/beyond-academics" element={<BeyondAcademics />} />
             <Route path="/activities" element={<Activities />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/banners" element={<AdminBanners />} />
+            <Route path="/admin/notices" element={<AdminNotices />} />
+            <Route path="/admin/gallery" element={<AdminGallery />} />
+            <Route path="/admin/enquiries" element={<AdminEnquiries />} />
           </Route>
 
           {/* ================= ADMIN AUTH ================= */}

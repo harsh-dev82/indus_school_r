@@ -39,20 +39,21 @@ const Gallery = () => {
         backgroundImage: `linear-gradient(to bottom right, rgba(37,99,235,.7), rgba(17,24,39,.8)), url(${bgImage})`,
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-24">
 
         <motion.div
-          className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl p-10"
+          className="bg-white/90 backdrop-blur-xl shadow-2xl rounded-2xl
+                     p-5 sm:p-8 lg:p-10"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="text-4xl font-bold text-blue-700 mb-10 text-center">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-700 mb-8 sm:mb-10 text-center">
             School Gallery
           </h1>
 
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
             initial="hidden"
             animate="visible"
             variants={{
@@ -71,12 +72,14 @@ const Gallery = () => {
               >
                 <Link
                   to={`/gallery/${img.id}`}
-                  className="group border rounded-xl overflow-hidden shadow hover:shadow-xl transition block bg-white"
+                  className="group border rounded-xl overflow-hidden
+                             shadow hover:shadow-xl transition
+                             block bg-white"
                 >
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
-                    className="relative h-64"
+                    className="relative h-40 sm:h-48 md:h-56 lg:h-64"
                   >
                     <img
                       src={img.images[0]?.image}
@@ -85,11 +88,11 @@ const Gallery = () => {
                     <div className="absolute inset-0 bg-black/25 group-hover:bg-black/40 transition"></div>
                   </motion.div>
 
-                  <div className="p-6 text-center">
-                    <h2 className="text-xl font-semibold text-gray-800">
+                  <div className="p-4 sm:p-6 text-center">
+                    <h2 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800">
                       {img.title}
                     </h2>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-xs sm:text-sm text-gray-500 mt-1">
                       {img.images.length} Photos
                     </p>
                   </div>
@@ -97,6 +100,7 @@ const Gallery = () => {
               </motion.div>
             ))}
           </motion.div>
+
         </motion.div>
 
       </div>

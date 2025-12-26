@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import bgImage from "../assets/gallery-banner.jpg";   // use same background across pages
+import bgImage from "../assets/gallery-banner.jpg";
 
 const sections = [
   {
@@ -36,13 +36,17 @@ export default function Academics() {
         backgroundImage: `linear-gradient(to bottom right, rgba(37,99,235,.7), rgba(17,24,39,.85)), url(${bgImage})`,
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
 
-        <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-10 grid md:grid-cols-4 gap-10">
+        <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl
+                        p-5 sm:p-8 lg:p-10
+                        grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-10">
 
           {/* Sidebar */}
           <motion.div
-            className="bg-white rounded-2xl shadow-lg p-6 space-y-3 sticky top-32 h-fit"
+            className="bg-white rounded-2xl shadow-lg
+                       p-4 sm:p-6 space-y-3
+                       md:sticky md:top-32 h-fit"
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -51,7 +55,9 @@ export default function Academics() {
               <a
                 key={i}
                 href={`#${s.title.replace(/\s/g, "")}`}
-                className="block px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition font-medium"
+                className="block px-4 py-3 rounded-lg text-gray-700
+                           hover:bg-blue-50 hover:text-blue-700 transition
+                           font-medium text-sm sm:text-base"
               >
                 {s.title}
               </a>
@@ -59,22 +65,23 @@ export default function Academics() {
           </motion.div>
 
           {/* Content Area */}
-          <div className="md:col-span-3 space-y-16">
+          <div className="md:col-span-3 space-y-10 sm:space-y-14 lg:space-y-16">
 
             {sections.map((s, i) => (
               <motion.div
                 key={i}
                 id={s.title.replace(/\s/g, "")}
-                className="bg-white rounded-2xl shadow-lg p-10"
+                className="bg-white rounded-2xl shadow-lg
+                           p-5 sm:p-8 lg:p-10"
                 initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.12 }}
               >
-                <h2 className="text-3xl font-extrabold text-blue-700 mb-4">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-700 mb-3 sm:mb-4">
                   {s.title}
                 </h2>
-                <p className="text-gray-700 leading-relaxed text-lg">
+                <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
                   {s.text}
                 </p>
               </motion.div>

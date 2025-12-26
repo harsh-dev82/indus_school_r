@@ -14,9 +14,7 @@ const menu = [
 const content: any = {
   academics: {
     title: "The School",
-    text: `Indus Public School is affiliated to CBSE Board in New Delhi till class XII.
-However, Class I to VIII follow a holistic school based curriculum which is
-innovative and internationally accepted.
+    text: `Indus Public School is spread over a vast lush green campus on National Highway-10. 30 minutes drive from Delhi Border. The School is affiliated to Central Board of Secondary Education, Delhi up to XII level providing education in Medical, Non-Medical, Commerce Streams. Every initiative, effort at the upcoming institute is single-mindedly focused on these three basic values. So while the young minds go through the process of learning, it will automatically, continually and effortlessly imbibe them, to give the individual an dynamic personality.
 
 Over the years, the school has grown steadily with a commitment to excellence,
 providing students with a nurturing environment and strong academic foundation.`,
@@ -60,18 +58,22 @@ export default function About() {
         backgroundImage: `linear-gradient(to bottom right, rgba(37,99,235,.7), rgba(17,24,39,.85)), url(${bgImage})`,
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-20 sm:py-28">
 
-        <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-10 grid md:grid-cols-4 gap-10">
+        <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl
+                        p-5 sm:p-8 lg:p-10
+                        grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-10">
 
           {/* Sidebar */}
           <motion.div
-            className="bg-orange-500 text-white rounded-2xl shadow-lg p-6 space-y-2 sticky top-32 h-fit"
+            className="bg-orange-500 text-white rounded-2xl shadow-lg
+                       p-4 sm:p-6 space-y-2
+                       md:sticky md:top-32 h-fit"
             initial={{ x: -40, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-xl font-bold mb-4">ABOUT US</h3>
+            <h3 className="text-lg sm:text-xl font-bold mb-4">ABOUT US</h3>
 
             {menu.map(item => (
               <button
@@ -90,15 +92,16 @@ export default function About() {
 
           {/* Content Area */}
           <motion.div
-            className="md:col-span-3 bg-white rounded-2xl shadow-lg p-10"
+            className="md:col-span-3 bg-white rounded-2xl shadow-lg
+                       p-5 sm:p-8 lg:p-10"
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="text-3xl font-extrabold text-blue-700 mb-6">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-blue-700 mb-4 sm:mb-6">
               {content[active].title}
             </h2>
-            <p className="text-gray-700 leading-relaxed whitespace-pre-line text-lg">
+            <p className="text-gray-700 leading-relaxed whitespace-pre-line text-base sm:text-lg">
               {content[active].text}
             </p>
           </motion.div>
