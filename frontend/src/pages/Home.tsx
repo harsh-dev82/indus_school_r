@@ -129,7 +129,7 @@ const Home = () => {
                 variants={fadeUp}
                 transition={{ delay: i * 0.2 }}
               >
-                <div className="h-48 overflow-hidden">
+                <div className="h-40 sm:h-44 md:h-48 overflow-hidden">
                   <img
                     src={item.img}
                     alt={item.title}
@@ -208,7 +208,7 @@ const Home = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-40 sm:h-48 md:h-56 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                 </div>
 

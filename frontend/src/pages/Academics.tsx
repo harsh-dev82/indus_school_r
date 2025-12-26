@@ -68,11 +68,12 @@ export default function Academics() {
           <div className="md:col-span-3 space-y-10 sm:space-y-14 lg:space-y-16">
 
             {sections.map((s, i) => (
-              <motion.div
+             <motion.div
                 key={i}
                 id={s.title.replace(/\s/g, "")}
                 className="bg-white rounded-2xl shadow-lg
-                           p-5 sm:p-8 lg:p-10"
+             p-5 sm:p-8 lg:p-10 scroll-mt-36"
+
                 initial={{ y: 40, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: true }}

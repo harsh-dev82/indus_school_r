@@ -1,63 +1,48 @@
 .carousel {
-  height: 90vh;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
 
-/* Slide */
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  opacity: 0;
-  transform: scale(1.1);
-  transition: opacity 1.2s ease, transform 1.2s ease;
-  z-index: 1;
+/* Desktop */
+.carousel {
+  height: 90vh;
 }
 
-.slide.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
-}
-
-/* Overlay (if you add text later) */
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.55), rgba(0,0,0,0.2));
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 8%;
-  color: white;
-  z-index: 5;
-}
-
-/* ========== Responsive Heights ========== */
-
+/* Tablet */
 @media (max-width: 1024px) {
-  .carousel {
-    height: 75vh;
-  }
-}
-
-@media (max-width: 768px) {
   .carousel {
     height: 65vh;
   }
 }
 
+/* Mobile */
+@media (max-width: 768px) {
+  .carousel {
+    height: 160px;
+  }
+}
+
+/* Small Mobile — IPS style */
 @media (max-width: 480px) {
   .carousel {
-    height: 60vh;
+    height: 120px;
   }
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
 }
