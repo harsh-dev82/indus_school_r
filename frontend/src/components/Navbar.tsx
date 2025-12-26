@@ -89,7 +89,7 @@ const Navbar: React.FC = () => {
               ["Academics", "/academics"],
               ["Admissions", "/admissions"],
               ["Gallery", "/gallery"],
-              ["Notices", "/notices"],
+              ["News & Events", "/notices"],
               ["Contact", "/contact"],
             ].map(([label, path]) => (
               <NavLink
